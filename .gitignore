@@ -1,3 +1,4 @@
+*.pickle
 *.csv
 *.tfrecords
 client_specific/*

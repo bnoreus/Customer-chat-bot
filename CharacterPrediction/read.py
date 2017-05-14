@@ -29,13 +29,13 @@ class DataReader:
 		seq_length = features['seq_length']
 
 		input_batch, target_batch, seq_len_batch = tf.train.shuffle_batch(
-			[input_indices, target_indices,seq_length], batch_size=128,
+			[input_indices, target_indices,seq_length], batch_size=32,
 			capacity=2000,
 			min_after_dequeue=1000)
 
-		self.input_batch = tf.sparse_tensor_to_dense(input_batch)
-		self.target_batch = tf.sparse_tensor_to_dense(target_batch)
-		self.seq_length_batch = seq_len_batch
+		self.input_batch = input_batch
+		self.target_batch = target_batch
+		self.seq_length_batch = tf.cast(seq_len_batch,tf.int32)
 		
 	def get_ops(self):
 		return self.input_batch,self.target_batch,self.seq_length_batch
